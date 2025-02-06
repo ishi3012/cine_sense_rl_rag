@@ -1,0 +1,43 @@
+# Virtual environment
+venv/
+.env
+*.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Data files
+data/raw/
+data/processed/
+*.csv
+*.json
+*.sqlite
+*.db
+
+# Model checkpoints & logs
+models/
+checkpoints/
+logs/
+*.h5
+*.pt
+*.ckpt
+*.onnx
+
+# API & UI related files
+*.log
+*.pid
+
+# IDE-specific files
+.vscode/
+.idea/
+*.iml
+
+# OS-specific files
+.DS_Store
+Thumbs.db

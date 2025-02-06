@@ -1,0 +1,29 @@
+# Data Configuration
+data:
+  raw_data_path: "data/raw/"
+  processed_data_path: "data/processed/"
+  dataset_name: "movielens"
+
+# Retrieval Model Settings
+retrieval:
+  embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
+  vector_store: "faiss"
+  top_k: 10
+
+# Reinforcement Learning Agent Settings
+reinforcement_learning:
+  model_type: "DQN"
+  gamma: 0.99
+  learning_rate: 0.001
+  batch_size: 64
+  replay_buffer_size: 10000
+  training_episodes: 1000
+
+# API Configuration
+api:
+  host: "0.0.0.0"
+  port: 8000
+
+# UI Configuration
+ui:
+  theme: "dark"

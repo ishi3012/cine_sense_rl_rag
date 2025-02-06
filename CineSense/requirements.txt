@@ -1,0 +1,33 @@
+# Core dependencies
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+
+# Deep learning & NLP
+torch
+transformers
+sentence-transformers
+faiss-cpu  # For efficient similarity search
+
+# Reinforcement Learning
+stable-baselines3
+gym
+
+# API
+fastapi
+uvicorn
+
+# Web UI
+streamlit
+gradio
+
+# Data processing
+tqdm
+requests
+
+# Testing & Utilities
+pytest
+black
+flake8

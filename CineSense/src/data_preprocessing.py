@@ -56,8 +56,11 @@ else:
     print(df.shape)
     # Save processed data to SQLite database
     conn = sqlite3.connect(db_path)
-    df.to_sql("movies_metadata", conn, if_exists="replace", index = False)
-    # test.to_sql("test", conn, if_exists="replace", index = False)
+    df.to_sql("Movies_metadata", conn, if_exists="replace", index = False)
+    # movies.drop(columns=["genres_list"], inplace=True)
+    movies.to_sql("Movies", conn, if_exists="replace", index=False)
+    users.to_sql("Users", conn, if_exists="replace", index=False)
+    ratings.to_sql("Ratings", conn, if_exists="replace", index=False)
     conn.close()
 
     print(f"✅ Processing complete! Train: {len(train)} rows, Test: {len(test)} rows.")
@@ -76,10 +79,10 @@ def check_database():
     print(f"Available tables in the database : {tables}")
 
     # Display sample data 
-    for table in ["movies_metadata"]:
+    for table in ["Movies_metadata","Movies", "Users", "Ratings"]:
         try:
             df_sample = pd.read_sql(f"SELECT * FROM {table} LIMIT 5;", conn)
-            print(f"\nSample data from {table}:")
+            print(f"\nSample data from {table}: ~~~~~~~~~~~~~~~~~~~ \n")
             print(df_sample)
         except Exception as e:
             print(f"Error reading table {table}: {e}")

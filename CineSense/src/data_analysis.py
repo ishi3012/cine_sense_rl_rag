@@ -36,7 +36,7 @@ print(f"\n~~~~~~~~~~~~~~ Genre Distribution :~~~~~~~~~~~~~~~~~~~~~~~\n")
 print(genre_counts.head(10))
 
 # Plot genre distribution
-plt.figure(figsize=(20,10))
+plt.figure(figsize=(10,10))
 sns.barplot(x=genre_counts.index[:10], y=genre_counts.values[:10])
 plt.xticks(rotation=45)
 plt.title("Top 10 Most Popular Genres")

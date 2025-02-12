@@ -2,16 +2,26 @@ import os
 import argparse
 import pandas as pd
 import sqlite3
+import yaml
 from sklearn.model_selection import train_test_split
+
+# Load configuration
+def load_config():
+    with open("config.yaml", "r") as file:
+        return yaml.safe_load(file)
+
+config = load_config()
 
 # File paths
 
-movie_path = "data/raw/movies.dat"
-ratings_path = "data/raw/ratings.dat"
-users_path = "data/raw/users.dat"
-train_path = "data/processed/train.csv"
-test_path = "data/processed/test.csv"
-db_path = "data/processed/cineSense.db"
+movie_path = config["data"]["movie"] #"data/raw/movies.dat"
+ratings_path = config["data"]["ratings"] #"data/raw/ratings.dat"
+users_path = config["data"]["users"] #"data/raw/users.dat"
+train_path = config["data"]["train"] #"data/processed/train.csv"
+test_path = config["data"]["test"] #"data/processed/test.csv"
+db_path = config["data"]["db"] #"data/processed/cineSense.db"
+
+
 
 # Allow force processing
 parser = argparse.ArgumentParser(description="Preprocess MovieLens 1M dataset.")

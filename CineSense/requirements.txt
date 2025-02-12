@@ -4,6 +4,7 @@ pandas
 scikit-learn
 matplotlib
 seaborn
+pyyaml
 
 # Deep learning & NLP
 torch
@@ -27,7 +28,11 @@ gradio
 tqdm
 requests
 
+# Vector Database
+pinecone-client  # Required for Pinecone vector search
+
 # Testing & Utilities
 pytest
 black
 flake8
+

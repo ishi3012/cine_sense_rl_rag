@@ -3,6 +3,14 @@ data:
   raw_data_path: "data/raw/"
   processed_data_path: "data/processed/"
   dataset_name: "movielens"
+  movie: "data/raw/movies.dat"
+  ratings: "data/raw/ratings.dat"
+  users: "data/raw/users.dat"
+  train: "data/processed/train.csv"
+  test: "data/processed/test.csv"
+  db: "data/processed/cineSense.db"
+  dataset_path: "data/processed/movie_dataset.csv"
+
 
 # Retrieval Model Settings
 retrieval:
@@ -27,3 +35,12 @@ api:
 # UI Configuration
 ui:
   theme: "dark"
+
+# Pinecone configuration
+pinecone:
+  index_name: "cinesense"
+  dimension: "384"
+  metric: "cosine"
+
+
+

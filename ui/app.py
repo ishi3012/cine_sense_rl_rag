@@ -1,9 +1,14 @@
 import streamlit as st
 import requests
+import yaml
 
-# FastAPI API URL (Replace with your actual forwarded URL from GitHub Codespaces)
-API_URL = "https://fictional-parakeet-8000.app.github.dev"
-# API_URL = "http://0.0.0.0:8000"
+# Load API URL from config.yaml
+def load_config():
+    with open("config.yaml", "r") as file:
+        return yaml.safe_load(file)
+
+config = load_config()
+API_URL = config["api"]["url"]
 
 # Streamlit UI Setup
 st.set_page_config(page_title="CineSense: Movie Recommendation", layout="wide")

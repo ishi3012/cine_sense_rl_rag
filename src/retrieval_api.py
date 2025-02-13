@@ -15,7 +15,7 @@ Key Functions:
 
 """
 
-
+import uvicorn
 from fastapi import FastAPI, HTTPException
 from src.retrieval import retrieve_similar_movies
 
@@ -43,3 +43,6 @@ def recommend_movies(query:str, top_k:int = 5):
         raise HTTPEXception(status_code = 404, detail="No Recommendation found.")
     
     return {"query": query, "results":results}
+
+if __name__ =="__main__":
+    unicorn.run(app,host="0.0.0.0", port=8080)

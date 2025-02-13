@@ -35,12 +35,12 @@ def recommend_movies(query:str, top_k:int = 5):
     """
 
     if not query.strip():
-        raise HTTPEXception(status_code=400, detail = "Query cannot be empty!")
+        raise HTTPException(status_code=400, detail = "Query cannot be empty!")
     
     results = retrieve_similar_movies(query, top_k)
 
     if not results:
-        raise HTTPEXception(status_code = 404, detail="No Recommendation found.")
+        raise HTTPException(status_code = 404, detail="No Recommendation found.")
     
     return {"query": query, "results":results}
 

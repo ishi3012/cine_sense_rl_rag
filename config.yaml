@@ -30,8 +30,8 @@ reinforcement_learning:
 # API Configuration
 api:
   host: "0.0.0.0"
-  port: 8000
-  url: "https://cine-sense-api.onrender.com/recommend"
+  port: 8080
+  url: "https://fictional-parakeet-j4rw9gqpcvhqw9-8080.app.github.dev"
 
 # UI Configuration
 ui:

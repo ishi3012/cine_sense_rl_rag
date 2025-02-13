@@ -1,37 +1,41 @@
 import streamlit as st
 import requests
 
-# FastAPI backend URL
-API_URL = "http://127.0.0.1:8000/recommend"
+# FastAPI API URL (Replace with your actual forwarded URL from GitHub Codespaces)
+API_URL = "https://fictional-parakeet-8000.app.github.dev"
+# API_URL = "http://0.0.0.0:8000"
 
-#Stremlit UI
+# Streamlit UI Setup
 st.set_page_config(page_title="CineSense: Movie Recommendation", layout="wide")
-
-st.title("AI-Powered Movie recommendation system")
+st.title("🎬 CineSense Movie Recommender")
 st.markdown("Enter a movie description or example to get the recommendations!")
 
-# User Input
+# User Inputs
+query = st.text_input("Enter a movie description:", placeholder="Mind-bending sci-fi like Interstellar")
+top_k = st.slider("Number of recommendations:", min_value=1, max_value=10, value=5)
+genre = st.text_input("Filter by Genre (optional):")
+min_rating = st.slider("Minimum rating:", 0.0, 5.0, 3.0)
 
-query = st.text_input = ("Enter a movie description: ", placeholder="Mind-bending sci-fi like Interstellar")
-top_k = st.slider("Number of recommendations: ", min_value = 1, max_vlue = 10, value = 5)
-
-#Submit button
+# Submit Button
 if st.button("Get Recommendations"):
     if query.strip():
         with st.spinner("Fetching recommendations..."):
             try:
-                response = requests.get(API_URL, parrams={"query":query, "top_k":top_k})
-                data = response.json()
+                api_url = f"{API_URL}/recommend"
+                params = {"query": query, "top_k": top_k, "genre": genre, "min_rating": min_rating}
+                response = requests.get(api_url, params=params)
                 
+                # ✅ Handle empty or invalid responses safely
                 if response.status_code == 200:
-                    st.subheader("Recommended Movies: ")
-                    for movie in data["results"]:
-                        st.write(f"**{movie['title']}** ({movie['genres']}) - 🔥 *{movie['score']}% match*")
+                    data = response.json()
+                    if "results" in data and data["results"]:
+                        st.subheader("Recommended Movies:")
+                        for movie in data["results"]:
+                            st.write(f"🎥 **{movie['title']}** ({movie['genres']}) - ⭐ {movie['rating']}")
+                    else:
+                        st.error("❌ No recommendations found!")
                 else:
-                    st.error(f"❌ Error: {data['detail']}")
+                    st.error(f"❌ API Error: {response.text}")
+                    
             except Exception as e:
                 st.error(f"⚠️ An error occurred: {str(e)}")
-    else:
-        st.warning("⚠️ Please enter a query before searching.")
-
-

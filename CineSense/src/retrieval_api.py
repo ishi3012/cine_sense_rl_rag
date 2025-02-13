@@ -31,7 +31,7 @@ def home():
 def recommend_movies(query:str, top_k:int = 5):
     """
     Recommend movies based on the user query. 
-    Example: /recommend?query=Mind-bending sci-fi like Interstellar&top_k=5
+    Example: /recommend?query=Sci-Fi like Interstellar&top_k=5&genre=Sci-Fi&min_rating=4.0
     """
 
     if not query.strip():

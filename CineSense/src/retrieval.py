@@ -58,8 +58,8 @@ if INDEX_NAME not in pc.list_indexes().names():
         )
     )
     print(f'Pinecone Index "{INDEX_NAME}" created successfully!')
-else:
-    print(f'Pinecone Index {pc.list_indexes().names()} found!')
+# else:
+#     print(f'Pinecone Index {pc.list_indexes().names()} found!')
 
 index = pc.Index(INDEX_NAME)
 

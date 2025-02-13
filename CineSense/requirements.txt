@@ -10,7 +10,8 @@ pyyaml
 torch
 transformers
 sentence-transformers
-faiss-cpu  # For efficient similarity search
+faiss-cpu==1.7.4
+
 
 # Reinforcement Learning
 stable-baselines3
@@ -29,10 +30,13 @@ tqdm
 requests
 
 # Vector Database
-pinecone-client  # Required for Pinecone vector search
+pinecone-client==2.2.4
+
 
 # Testing & Utilities
 pytest
 black
 flake8
+
+python-dotenv
 

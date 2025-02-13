@@ -1,10 +1,28 @@
-from fastapi import FastAPI, HTTPEXception
+"""
+FastAPI Service for External Requests.
+
+Purpose:
+
+- Provides a REST API for the movie retrieval system.
+- It exposes retrieval.py as a service, allowing external apps or users to request recommendations via HTTP.
+
+Key Functions:
+    /recommend endpoint:
+        Accepts a query (e.g., "Mind-bending sci-fi movies like Interstellar").
+        Calls retrieve_similar_movies() from retrieval.py.
+        Returns top similar movies in a JSON response.
+
+
+"""
+
+
+from fastapi import FastAPI, HTTPException
 from src.retrieval import retrieve_similar_movies
 
 # Initialize FastAPI app 
 app = FastAPI(title="Movie Recommendation API", version="1.0")
 
-@app.ge("/")
+@app.get("/")
 
 def home():
     return {"message": "Welcome to the Movie Recommendation API! Use /recommend to get movie suggestions."}

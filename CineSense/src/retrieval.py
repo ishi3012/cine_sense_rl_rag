@@ -1,3 +1,14 @@
+"""
+Handles Embedding Storage & Vector Search
+
+Purpose:
+
+- This file is responsible for storing and retrieving movie embeddings in/from Pinecone.
+- It converts movie metadata into vector representations and performs similarity searches based on user queries.
+
+
+"""
+
 from sentence_transformers import SentenceTransformer
 from pinecone import Pinecone, ServerlessSpec
 import pandas as pd
@@ -102,7 +113,8 @@ def retrieve_similar_movies(query, top_k = 5):
     print(f"Processing query: {query}")
     query_embedding = model.encode(query, convert_to_numpy = True).tolist()
 
-    result = index.query(query_embedding, top_k=top_k, include_metadata=True)
+    result = index.query(vector = query_embedding, top_k=top_k, include_metadata=True)
+    # result = result.drop_duplicates(subset=["id"])
 
     if "matches" not in result:
         print("⚠️ No matches found.")
@@ -117,6 +129,7 @@ def retrieve_similar_movies(query, top_k = 5):
         }
         for match in result["matches"]
         ]
+    
     return recommendations
 
 if __name__ == "__main__":

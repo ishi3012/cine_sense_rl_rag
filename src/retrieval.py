@@ -69,43 +69,6 @@ model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 # path to movie dataset
 MOVIE_DATA_PATH = config["data"]["dataset_path"]
 
-
-
-# def store_movie_embeddings():
-#     """Encodes movies and stores them in Pinecone for retrieval."""
-#     print("Loading movie dataset...")
-    
-#     if not os.path.exists(MOVIE_DATA_PATH):
-#         raise FileNotFoundError(f"Movie dataset not found at {MOVIE_DATA_PATH}")
-
-#     df = pd.read_csv(MOVIE_DATA_PATH)
-#     remaining_count = df.shape[0]
-    
-#     if "movieId" not in df.columns or "title" not in df.columns or "genres" not in df.columns:
-#         raise ValueError("Dataset must contain 'MovieID', 'Title', and 'Genres' columns.")
-
-#     df["text"] = df["title"] + " " + df["genres"]
-
-#     print("Generating embeddings and storing them in Pinecone...")
-#     to_upsert = []
-    
-#     for i, row in df.iterrows():
-#         embedding = model.encode(row["text"], convert_to_numpy=True).tolist()
-#         to_upsert.append((str(row["movieId"]), embedding, {"title": row["title"], "genres": row["genres"]}))
-
-#         # Batch upserting every 1000 items for efficiency
-#         if len(to_upsert) >= 1000:
-#             index.upsert(vectors=to_upsert)
-#             to_upsert = []
-#             remaining_count -= 1000
-#             print(f"{remaining_count} movie records left to be encoded...")
-
-#     # Final batch upload
-#     if to_upsert:
-#         index.upsert(vectors=to_upsert)
-
-#     print("✅ Movie embeddings stored in Pinecone successfully!")
-
 def store_movie_embeddings():
     """Encodes only NEW movies and stores them in Pinecone."""
     print("Loading movie dataset...")
@@ -185,6 +148,7 @@ def retrieve_similar_movies(query, top_k = 5):
             "id" : match["id"],
             "title" : match["metadata"]["title"],
             "genres": match["metadata"]["genres"],
+            "rating": match["metadata"].get("rating", "N/A"),
             "scores": round(match["score"]*100, 2)
         }
         for match in result["matches"]
@@ -192,7 +156,7 @@ def retrieve_similar_movies(query, top_k = 5):
     
     return recommendations
 
-if __name__ == "__main__":   
+if __name__ == "__main__":  
     store_movie_embeddings()
     stats = index.describe_index_stats()
     print(stats)

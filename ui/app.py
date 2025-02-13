@@ -33,12 +33,21 @@ if st.button("Get Recommendations"):
                 # ✅ Handle empty or invalid responses safely
                 if response.status_code == 200:
                     data = response.json()
+                    # st.write("🔍 API Response Debug:", data)  # Debug output
+
                     if "results" in data and data["results"]:
                         st.subheader("Recommended Movies:")
                         for movie in data["results"]:
-                            st.write(f"🎥 **{movie['title']}** ({movie['genres']}) - ⭐ {movie['rating']}")
+                            # st.write("📌 Debug Movie Entry:", movie)  # Debug each movie entry
+                            
+                            # Safely access movie fields
+                            title = movie.get("title", "Unknown Title")
+                            genres = movie.get("genres", "Unknown Genre")
+                            rating = movie.get("rating", "N/A")  # Prevent crash if 'rating' is missing
+
+                            st.write(f"🎥 **{title}** ({genres}) - ⭐ {rating}")
                     else:
-                        st.error("❌ No recommendations found!")
+                        st.error("❌ No recommendations found!")    
                 else:
                     st.error(f"❌ API Error: {response.text}")
                     

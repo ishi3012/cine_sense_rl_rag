@@ -19,31 +19,37 @@ st.markdown("Enter a movie description or example to get the recommendations!")
 query = st.text_input("Enter a movie description:", placeholder="Mind-bending sci-fi like Interstellar")
 top_k = st.slider("Number of recommendations:", min_value=1, max_value=10, value=5)
 genre = st.text_input("Filter by Genre (optional):")
-min_rating = st.slider("Minimum rating:", 0.0, 5.0, 3.0)
+min_rating = st.slider("Minimum rating:", 0, 5, 3)
 
 # Submit Button
 if st.button("Get Recommendations"):
     if query.strip():
         with st.spinner("Fetching recommendations..."):
             try:
+
+                
                 api_url = f"{API_URL}/recommend"
-                params = {"query": query, "top_k": top_k, "genre": genre, "min_rating": min_rating}
+                params = {
+                    "query": query,
+                    "top_k": int(top_k),  
+                    "genre": genre,
+                    "min_rating": int(min_rating),  # Convert min_rating to int
+                }
                 response = requests.get(api_url, params=params)
+
                 
                 # ✅ Handle empty or invalid responses safely
                 if response.status_code == 200:
                     data = response.json()
-                    # st.write("🔍 API Response Debug:", data)  # Debug output
-
+                    
                     if "results" in data and data["results"]:
                         st.subheader("Recommended Movies:")
                         for movie in data["results"]:
-                            # st.write("📌 Debug Movie Entry:", movie)  # Debug each movie entry
                             
                             # Safely access movie fields
                             title = movie.get("title", "Unknown Title")
-                            genres = movie.get("genres", "Unknown Genre")
-                            rating = movie.get("rating", "N/A")  # Prevent crash if 'rating' is missing
+                            genres = movie.get("genres", "Unknown Genre")                            
+                            rating = int(round(movie.get("rating", 0))) if isinstance(movie.get("rating"), (int, float)) else "N/A"
 
                             st.write(f"🎥 **{title}** ({genres}) - ⭐ {rating}")
                     else:

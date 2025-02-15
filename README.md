@@ -5,6 +5,9 @@
 
 By optimizing recommendations based on **user preferences, watch history, and engagement metrics**, CineSense enhances content discovery and keeps users engaged.
 
+
+![Movie Recommendation System](assets/system_design.png)
+
 ---
 
 ## 🚀 Key Features

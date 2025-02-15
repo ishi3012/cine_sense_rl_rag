@@ -23,8 +23,8 @@ dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.env")
 load_dotenv(dotenv_path)
 
 # Fetch API key securely
-PINECONE_API_KEY = "pcsk_6UpUPE_2vwufbRAmvYnpK1zXV2Ci9sVrWC9ww6Vm5i2VDD5pESS7juVRBG8YMCDciqukLb"#os.getenv("PINECONE_API_KEY")
-PINECONE_ENV = "us-east-1"#os.getenv("PINECONE_ENV")
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+PINECONE_ENV = os.getenv("PINECONE_ENV")
 
 if not PINECONE_API_KEY:
     raise ValueError("Missing PINECONE_API_KEY. Set it in .env or environment variables.")

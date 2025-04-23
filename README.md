@@ -1,23 +1,55 @@
 # **CineSense: Reinforcement Learning-Driven RAG Movie Recommendation System 🎬🤖**
 
 ## 📌 Overview
-**CineSense** is an AI-powered **movie recommendation system** that leverages **Retrieval-Augmented Generation (RAG)** and **Reinforcement Learning (RL)** to provide **personalized, engaging, and explainable recommendations**. 
+CineSense is a Generative AI-driven movie recommendation system designed to deliver semantic, personalized, and explainable suggestions. The MVP focuses on Retrieval-Augmented Generation (RAG) with Reinforcement Learning (RL) for feedback-driven optimization.
 
-By optimizing recommendations based on **user preferences, watch history, and engagement metrics**, CineSense enhances content discovery and keeps users engaged.
+Long-term, CineSense aims to replicate key architectural principles from Netflix's latest research, including:
 
+A Foundation Model for Personalized Recommendation (2025)
 
-![Movie Recommendation System](assets/system_design.png)
+The UniCoRn unified ranking model (2024)
+
+These serve as inspiration for extending CineSense into a multi-task, scalable, and unified recommendation framework.
+
+🔭 Project Roadmap
+
+- 🔄 MVP – Current Implementation
+    - Retrieval using Sentence-BERT + FAISS
+
+    - Feedback loop with Reinforcement Learning (PPO/DQN)
+
+    - Basic interaction simulation and explainable UI
+
+- 🔄 Phase 2 – Netflix Foundation Model Replication (Inspired by: Netflix’s Foundation Model for Personalized Recommendation (2025))
+    - Unified Preference Learning across tasks (e.g., viewing history, ratings, clicks)
+
+    - Modeling long-term interaction history for deeper personalization
+
+    - Embedding model upgrades (e.g., CLIP, T5 variants, Titan via AWS Bedrock)
+
+    - Modular architecture for multi-domain recommendation
+
+- 🔄 Phase 3 – UniCoRn-Based Contextual Ranker (Inspired by: Joint Modeling of Search and Recommendations via a Unified Contextual Ranker (UniCoRn, 2024))
+    - Joint modeling of query-video and video-video relationships
+
+    - Context-aware ranking using contextual embeddings and deep learning
+
+    - Incorporation of query metadata, session length, CTR, and dwell time
+
+    - Unified multi-task pipeline: search + recommendations
+
 
 ---
 
-## 🚀 Key Features
+## 🚀 MVP Features 
 ✅ **RAG-Based Retrieval** – Uses **Sentence-BERT embeddings** and **vector similarity search** to retrieve relevant movies.  
 ✅ **Reinforcement Learning Optimization** – Trains an **RL agent (DQN/PPO)** to improve recommendations based on **user engagement**.  
 ✅ **Multi-Modal Data** – Integrates **metadata, genres, reviews, and external ratings (IMDb, Rotten Tomatoes)**.  
 ✅ **Explainability** – Provides **human-like justifications** for recommendations.  
 ✅ **API & UI** – Features a **REST API (FastAPI/Flask)** and an interactive **UI (Streamlit/Gradio)**.  
 
----
+![Movie Recommendation System](assets/system_design.png)
+
 
 ## 📁 Project Structure
 ```
@@ -31,10 +63,8 @@ CineSense
 │── requirements.txt           # Dependencies
 │── config.yaml                # Configurations
 │── README.md                  # Project documentation
+
 ```
-
-
----
 
 ## 🛠️ Setup Instructions
 
@@ -64,9 +94,6 @@ Force Reprocess Raw Data, if you need to reprocess the data, use:
 python src/data_preprocessing.py --force
 ```
 👉 This will overwrite train.csv and test.csv.
-
-
-
 
 3️⃣ Run the API
 
